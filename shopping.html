@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Online Shopping</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+</div>
+<div id="cart" class="container mt-3">
+    <div class="row">
+        <div>
+            <h2 style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Shopping Cart</h2>
+        </div>
+        <div>
+            <img style="max-width: 50px;" src="https://icons.veryicon.com/png/o/miscellaneous/flower-mall-color-icon/shopping-cart-114.png" alt="">
+        </div>
+    </div>
+    <ul style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;" id="cartItems"></ul>
+</div>
+
+<script>
+    class ShoppingCart {
+        constructor(user) {
+            this.user = user;
+            this.isLoggedIn = false;
+            this.items = [
+                { id: 1, name: 'Laptop', price: 960 },
+                { id: 2, name: 'Mouse', price: 25 },
+                { id: 3, name: 'Keyboard', price: 45 },
+                { id: 4, name: 'Monitor', price: 199 },
+                { id: 5, name: 'Headphones', price: 75 },
+                { id: 6, name: 'Webcam', price: 55 },
+                { id: 7, name: 'Printer', price: 150 },
+                { id: 8, name: 'External Hard Drive', price: 85 }
+            ];
+            this.cart = [];
+        }
+
+        login() {
+            this.isLoggedIn = true;
+            console.log(`${this.user} is now logged in.`);
+        }
+
+        logout() {
+            this.isLoggedIn = false;
+            console.log(`${this.user} is now logged out.`);
+        }
+
+        showItems() {
+            console.log('Available items:');
+            this.items.forEach(item => {
+                console.log(`ID: ${item.id}, Name: ${item.name}, Price: $${item.price}`);
+            });
+        }
+
+        addToCart(itemId) {
+            // checks logged in status with the 'not' operator
+            if (!this.isLoggedIn) {
+                console.log('You must be logged in to add items to the cart.');
+                return;
+            }
+            // this searches through the 'items' array. Checks if there is a matching item ID to the one given into the addToCart function
+            const item = this.items.find(item => item.id === itemId);
+            if (item) {
+                this.cart.push(item);
+                console.log(`${item.name} has been added to the cart.`);
+            } else {
+                console.log('Item not found.');
+            }
+        }
+
+        calculateTotal() {
+            // the reduce method executes the provided function on each element in the 'this.cart' array
+            // the 'sum' amount is set to a starting value of 0 and the item price for every item found in the array is added as it goes through the list
+            const total = this.cart.reduce((sum, item) => sum + item.price, 0);
+            console.log(`Total cost of items in the cart: $${total}`);
+        }
+}
+
+// examples for the console
+const transaction = new ShoppingCart('Isaias');
+
+transaction.showItems();
+
+transaction.login(); // trying to add to cart before running this will result in an error message
+
+transaction.addToCart(1);
+transaction.addToCart(3);
+transaction.addToCart(8)
+
+transaction.calculateTotal();
+
+transaction.logout();
+
+</script>
+
+</body>
+</html>

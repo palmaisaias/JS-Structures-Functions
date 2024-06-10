@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Online Shopping</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar bg-body-tertiary">
+        <div style="background-color: rgba(87, 170, 105, 0.526);" class="container">
+          <a class="navbar-brand" href="#">
+            <img src="https://www.freeiconspng.com/thumbs/bank-icon/blue-bank-icon-in-flat-style-with-the-building-facade-with-three--26.png" alt="Bootstrap" width="55" height="50">
+          </a>
+        </div>
+      </nav>
+
+<div class="bank-container">
+    <h1 style="font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif, sans-serif;">Bank Account Assignment</h1>
+
+<script>
+class BankAccount {
+    constructor(user, balance = 0) {
+        this.user = user
+        this.balance = balance
+    }
+    // creates the method 'deposit' that takes 'amount' as a parameter
+    deposit(amount) {
+        // checks if the number given is positive and if so, adds it to the balance
+        if (amount > 0) {
+            this.balance += amount;
+            console.log(`${this.user} deposited $${amount}. New balance: $${this.balance}`);
+        } 
+        else {
+            console.log(`Depositive must be POSITIVE, yo`)
+        }
+    }
+
+    getBalance() {
+        return this.balance;
+    }
+
+    withdraw(amount) {
+        // checks if the mount entered is a positive number
+        if (amount > 0) {
+            // if the balance is higher than the amount entered, the amount is subtracted from 'this.balance'
+            if (this.balance >= amount) {
+                this.balance -= amount;
+                console.log(`${this.user} withdrew $${amount}. New balance: $${this.balance}`);
+            } else {
+                console.log(`Insufficient funds, you have been charged a $25 overdraw fee...JK. Current balance: $${this.balance}`);
+            }
+        } else {
+            console.log(`Withdrawal amount must be a positive number`);
+        }
+    }
+
+    // this just prints the current balance. Technically getBalance is already getting the balance but since Im using that 
+    // function to simply return the number and not actually print something out along with it, I made the 'current' function
+    current() {
+        console.log(`Current balance: $${this.balance}`);
+    }
+}
+
+// Examples for the console
+
+const firstAccount = new BankAccount('Isaias', 2430);
+
+console.log(`Starting Balance: $${firstAccount.getBalance()}`);
+
+firstAccount.deposit(327);
+
+console.log(`Current balance: $${firstAccount.getBalance()}`);
+
+firstAccount.withdraw(75)
+
+firstAccount.withdraw(5000)
+
+firstAccount.current()
+
+</script>
+
+</body>
+</html>
